@@ -1,0 +1,17 @@
+{
+  "name": "reactwizard",
+  "description": "React Wizard Component",
+  "main": "dist/index.js",
+  "authors": [
+    "keyadesai"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
