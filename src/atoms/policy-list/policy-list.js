@@ -4,20 +4,22 @@ import React from 'react';
 const divStyle = {border:'1px solid red'};
 
 
-const PolicyList = ({ children, policies= [] }) => (
+const PolicyList = ({policies= [], verifyPolicy}) => (
   <div style={divStyle}>
     Policy List
        <ul>
           {policies.map(function(listValue){
-            return <li>Policy Id : {listValue.id}</li>;
+            return <li key={listValue.id}>Policy Id : {listValue.id}
+            {!listValue.verified ? <button onClick={verifyPolicy.bind(null, listValue.id)}>Please Verify</button>: null }
+            </li>;
           })}
         </ul>
       </div>
 );
 
 PolicyList.propTypes = {
-  children: React.PropTypes.string.isRequired,
-  policies: React.PropTypes.object.isRequired
+  policies: React.PropTypes.array.isRequired,
+  verifyPolicy: React.PropTypes.func
 };
 
 

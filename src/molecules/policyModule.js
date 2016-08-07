@@ -1,34 +1,46 @@
 import React from 'react';
 import Alerts from '../atoms/alerts/alerts';
 import PolicyList from '../atoms/policy-list/policy-list';
+import _ from 'lodash';
 
 
-const policiesFromServer = [{
-  id: 1
-},
-{
-  id: 2
-}];
+// Container Component
+const PolicyModule = React.createClass({
+  getInitialState: function() {
+    return {
+      policiesFromServer: [
+        {id:1, name:'Policy 1', verified:true},
+        {id:2, name:'Policy 2', verified:true},
+        {id:3, name:'Policy 3', verified:false},
+        {id:4, name:'Policy 4', verified:false}
+      ]
+    }
+  },
 
+  render: function() {
+    return (
+      <div>
+      <Alerts policies={this.state.policiesFromServer}>
+      </Alerts>
 
-const PolicyModule = ({ children }) => (
+      <PolicyList policies={this.state.policiesFromServer} verifyPolicy={this.verifyPolicy}>
+      </PolicyList>
 
+      </div>
+    );
+  },
 
-  <div>
-    <Alerts policies={policiesFromServer}>
-    {children}
-  </Alerts>
+  verifyPolicy: function(policyId) {
+    var newState = Object.assign({}, this.state)
+    var policy = _.find(newState.policiesFromServer, {id: policyId});
+    policy.verified = !policy.verified
+    this.setState(newState)
+    console.log(newState);
+  }
+});
 
-  <PolicyList policies={policiesFromServer}>
-    {children}
-  </PolicyList>
-
-  </div>
-);
 
 PolicyModule.propTypes = {
-  children: React.PropTypes.string.isRequired
 };
-
 
 export default PolicyModule;
