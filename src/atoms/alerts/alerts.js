@@ -7,8 +7,7 @@ const Alerts = ({policies = [] }) => (
       Alerts
   <ul>
           {policies.map(function(listValue){
-            return <li key={listValue.id}>Alert for Policy Id : {listValue.id}</li>;
-          })}
+            return !listValue.verified ? <li key={listValue.id}>Please verify policy : {listValue.id}</li> : null;          })}
         </ul>
       </div>
 );
