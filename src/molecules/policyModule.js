@@ -34,8 +34,10 @@ const PolicyModule = React.createClass({
     var newState = Object.assign({}, this.state)
     var policy = _.find(newState.policiesFromServer, {id: policyId});
     policy.verified = !policy.verified
-    this.setState(newState)
-    console.log(newState);
+    this.setState(newState);
+    //emit event
+    window.globalEmitter.emit('policyVerified', policyId);
+    console.log('emmitted event');
   }
 });
 
